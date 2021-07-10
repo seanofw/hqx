@@ -1,6 +1,22 @@
 hqx Library README
 ==================
 
+# `seanofw` Note
+
+This is my derivative of [grom358's version](https://github.com/grom358/hqx) of HQX.
+
+**What's different in my version?**  This has improved handling of alpha; if a
+pixel is sufficiently transparent (alpha difference of 64 or more), the smoothing
+rules will not accidentally treat it as black, which could result in weird halos on
+grom358's original.  These added tests come at a slight performance cost, but
+they result in a major quality improvement for transparent artwork.
+
+-------------------------------
+
+Original Readme follows below...
+
+-------------------------------
+
 # Introduction
 hqx ("hq" stands for "high quality" and "x" stands for magnification) is one of the pixel art scaling algorithms developed by Maxim Stepin, used in emulators such as Nestopia, bsnes, ZSNES, Snes9x, FCE Ultra and many more. There are 3 hqx filters: hq2x, hq3x and hq4x which magnify by factor of 2, 3 and 4 respectively.
 

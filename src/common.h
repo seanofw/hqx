@@ -29,10 +29,12 @@
 #define MASK_13    0x00FF00FF
 #define MASK_RGB   0x00FFFFFF
 #define MASK_ALPHA 0xFF000000
+#define SHIFT_ALPHA 24
 
 #define Ymask 0x00FF0000
 #define Umask 0x0000FF00
 #define Vmask 0x000000FF
+#define trA   0x40
 #define trY   0x00300000
 #define trU   0x00000700
 #define trV   0x00000006
@@ -53,9 +55,14 @@ static inline int yuv_diff(uint32_t yuv1, uint32_t yuv2) {
             ( abs((yuv1 & Vmask) - (yuv2 & Vmask)) > trV ) );
 }
 
+static inline int alpha_diff(uint32_t c1, uint32_t c2)
+{
+    return ( abs( ((c1 & MASK_ALPHA) >> SHIFT_ALPHA) - ((c2 & MASK_ALPHA) >> SHIFT_ALPHA) ) > trA );
+}
+
 static inline int Diff(uint32_t c1, uint32_t c2)
 {
-    return yuv_diff(rgb_to_yuv(c1), rgb_to_yuv(c2));
+    return alpha_diff(c1, c2) || yuv_diff(rgb_to_yuv(c1), rgb_to_yuv(c2));
 }
 
 /* Interpolate functions */

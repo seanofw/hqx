@@ -234,7 +234,7 @@ HQX_API void HQX_CALLCONV hq4x_32_rb( const uint32_t * sp, uint32_t srb, uint32_
                 if ( w[k] != w[5] )
                 {
                     yuv2 = rgb_to_yuv(w[k]);
-                    if (yuv_diff(yuv1, yuv2))
+                    if (yuv_diff(yuv1, yuv2) || alpha_diff(w[k], w[5]))
                         pattern |= flag;
                 }
                 flag <<= 1;
